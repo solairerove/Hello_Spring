@@ -15,7 +15,7 @@ public class DataBaseImpl implements IDataBase{
     @Override
     public void addStudent(Student student) {
         Session session=this.sessionFactory.getCurrentSession();
-        session.persist(session);
+        session.persist(student);
     }
 
     @Override

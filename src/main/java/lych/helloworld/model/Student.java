@@ -8,7 +8,6 @@ public class Student {
 
     @Id
     @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
 
     @Column(name = "firstName")
