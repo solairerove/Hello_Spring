@@ -1,5 +1,0 @@
-<root>
-    <item name='org.springframework.ui.Model'>
-        <annotation name='java.lang.Deprecated'/>
-    </item>
-</root>
