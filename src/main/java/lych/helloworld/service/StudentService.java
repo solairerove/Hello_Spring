@@ -1,46 +1,50 @@
 package lych.helloworld.service;
 
-/**
- * Interface for work with Student Service
- */
-
 import lych.helloworld.model.Student;
 
 import java.util.List;
 
+
+/**
+ * Interface for work with Student Service
+ */
 public interface StudentService {
 
     /**
+     * Implementation addition Student to Data Base
+     *
      * @param student
      * @return "Message about successful work"
-     * Implementation addition Student to Data Base
      */
     Student addStudent(Student student);
 
     /**
+     * Implementation renewal Student in Data Base
      *
      * @param student
      * @return "Message about successful work"
-     * Implementation renewal Student in Data Base
      */
     Student updateStudent(Student student);
 
     /**
-     * @param id
      * Implementation delete Student from Data Base by Id
+     *
+     * @param id
      */
     void removeStudent(Integer id);
 
     /**
+     * Display Student from Data Base by Id
+     *
      * @param id
      * @return object of Student class
-     * Display Student from Data Base by Id
      */
     Student getStudentById(Integer id);
 
     /**
-     * @return List objects of Student class
      * Display all Students from Data Base
+     *
+     * @return List objects of Student class
      */
     List<Student> listStudents();
 }

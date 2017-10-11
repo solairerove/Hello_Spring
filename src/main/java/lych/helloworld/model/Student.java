@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "students")
 @Data
-public class Student implements Persistable<Integer>{
+public class Student implements Persistable<Integer> {
 
     @Id
     @Column(name = "Id")
@@ -24,6 +24,7 @@ public class Student implements Persistable<Integer>{
     @Column(name = "lastName")
     private String lastName;
 
+    @Override
     public boolean isNew() {
         return Objects.nonNull(Id);
     }

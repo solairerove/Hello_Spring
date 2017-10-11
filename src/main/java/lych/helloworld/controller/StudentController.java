@@ -19,35 +19,30 @@ public class StudentController {
     private DefaultStudentService defaultStudentService;
 
     @RequestMapping(value = "students", method = RequestMethod.GET)
-    public ResponseEntity listStudents()  {
+    public ResponseEntity listStudents() {
 
-       List<Student> studentList=this.defaultStudentService.listStudents();
-       return ResponseEntity.ok().body(studentList);
+        List<Student> studentList = this.defaultStudentService.listStudents();
+        return ResponseEntity.ok().body(studentList);
     }
 
-    @RequestMapping(value ="students/add",method = {RequestMethod.POST})
-    public ResponseEntity addStudent(Student student)
-    {
-        if(student.getId()==0)
-        {
+    @RequestMapping(value = "students/add", method = {RequestMethod.POST})
+    public ResponseEntity addStudent(Student student) {
+        if (student.getId() == 0) {
             this.defaultStudentService.addStudent(student);
-        }
-        else this.defaultStudentService.updateStudent(student);
+        } else this.defaultStudentService.updateStudent(student);
         return ResponseEntity.ok().body("Student added");
     }
 
     @RequestMapping("students/remove/{id}")
-    public ResponseEntity deleteStudent(@PathVariable("id") Integer id)
-    {
+    public ResponseEntity deleteStudent(@PathVariable("id") Integer id) {
         this.defaultStudentService.removeStudent(id);
 
         return ResponseEntity.ok().body("Student deleted");
     }
 
     @RequestMapping("students/student/{id}")
-    public ResponseEntity showTheStudent(@PathVariable("id") Integer id)
-    {
-        Student student=this.defaultStudentService.getStudentById(id);
+    public ResponseEntity showTheStudent(@PathVariable("id") Integer id) {
+        Student student = this.defaultStudentService.getStudentById(id);
 
         return ResponseEntity.ok().body(student);
     }
