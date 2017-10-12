@@ -13,33 +13,33 @@ public interface StudentService {
     /**
      * Implementation addition Student to Data Base
      *
-     * @param student
+     * @param student Student student
      * @return "Message about successful work"
      */
-    Student addStudent(Student student);
+    Student addStudent(final Student student);
 
     /**
      * Implementation renewal Student in Data Base
      *
-     * @param student
+     * @param student Student student
      * @return "Message about successful work"
      */
-    Student updateStudent(Student student);
+    Student updateStudent(final Student student);
 
     /**
      * Implementation delete Student from Data Base by Id
      *
-     * @param id
+     * @param id Student id
      */
-    void removeStudent(Integer id);
+    void removeStudent(final Integer id);
 
     /**
      * Display Student from Data Base by Id
      *
-     * @param id
+     * @param id Student id
      * @return object of Student class
      */
-    Student getStudentById(Integer id);
+    Student getStudentById(final Integer id);
 
     /**
      * Display all Students from Data Base

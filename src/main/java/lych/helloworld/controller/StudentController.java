@@ -1,49 +1,52 @@
 package lych.helloworld.controller;
 
+import lombok.RequiredArgsConstructor;
 import lych.helloworld.model.Student;
 import lych.helloworld.service.DefaultStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StudentController {
-
-
-    @Autowired
-    private DefaultStudentService defaultStudentService;
+    
+    private final DefaultStudentService defaultStudentService;
 
     @RequestMapping(value = "students", method = RequestMethod.GET)
     public ResponseEntity listStudents() {
 
-        List<Student> studentList = this.defaultStudentService.listStudents();
-        return ResponseEntity.ok().body(studentList);
+        return ResponseEntity.ok().body(defaultStudentService.listStudents());
     }
 
-    @RequestMapping(value = "students/add", method = {RequestMethod.POST})
-    public ResponseEntity addStudent(Student student) {
-        if (student.getId() == 0) {
-            this.defaultStudentService.addStudent(student);
-        } else this.defaultStudentService.updateStudent(student);
-        return ResponseEntity.ok().body("Student added");
+    @RequestMapping(value = "students/add", method = RequestMethod.POST)
+    public ResponseEntity addStudent(@RequestBody Student student) {
+
+        return ResponseEntity.ok().body(defaultStudentService.addStudent(student));
+    }
+
+    @RequestMapping(value = "students/update/{id}", method = RequestMethod.POST)
+    public ResponseEntity updateStudent(@PathVariable("id") Integer id, @RequestBody Student student) {
+
+        Student updateStudent = defaultStudentService.getStudentById(id);
+        updateStudent.setFirstName(student.getFirstName());
+        updateStudent.setLastName(student.getLastName());
+
+        return ResponseEntity.ok().body(defaultStudentService.updateStudent(updateStudent));
     }
 
     @RequestMapping("students/remove/{id}")
     public ResponseEntity deleteStudent(@PathVariable("id") Integer id) {
-        this.defaultStudentService.removeStudent(id);
 
-        return ResponseEntity.ok().body("Student deleted");
+        Student deletedStudent = defaultStudentService.getStudentById(id);
+        defaultStudentService.removeStudent(id);
+
+        return ResponseEntity.ok().body(deletedStudent);
     }
 
     @RequestMapping("students/student/{id}")
     public ResponseEntity showTheStudent(@PathVariable("id") Integer id) {
-        Student student = this.defaultStudentService.getStudentById(id);
 
-        return ResponseEntity.ok().body(student);
+        return ResponseEntity.ok().body(defaultStudentService.getStudentById(id));
     }
 }

@@ -1,21 +1,23 @@
 package lych.helloworld.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "students")
 @Data
-public class Student implements Persistable<Integer> {
+public class Student implements Persistable<Integer>, Serializable {
 
+    private static final long serialVersionUID = -1865211746167974108L;
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Integer Id;
 
     @Column(name = "firstName")
