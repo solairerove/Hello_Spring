@@ -58,4 +58,12 @@ public class DefaultStudentService implements StudentService {
 
         return studentRepository.findAll();
     }
+
+    @Override
+    public Boolean studentExist(Integer id) {
+
+        log.info("Find student");
+
+        return studentRepository.exists(id);
+    }
 }

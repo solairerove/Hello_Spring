@@ -47,4 +47,12 @@ public interface StudentService {
      * @return List objects of Student class
      */
     List<Student> listStudents();
+
+    /**
+     * Display existence of student.
+     *
+     * @param id Student id.
+     * @return boolean value.
+     */
+    Boolean studentExist(final Integer id);
 }
