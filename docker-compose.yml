@@ -1,14 +1,13 @@
 version: '3.1'
 
 services:
-  db:
-    image: mysql:latest
+  postgres:
+    image: postgres:latest
+    container_name: student
     restart: on-failure
-    container_name: Student
-    ports:
-      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: Students
-      MYSQL_USER: dmitry
-      MYSQL_PASSWORD: dmitry
+      POSTGRES_USER: dmitry
+      POSTGRES_PASSWORD: dmitry
+      POSTGRES_DB: Students
+    ports:
+      - "5432:5432"
