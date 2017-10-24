@@ -14,32 +14,37 @@ import java.util.List;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class DefaultUserService implements UserService{
+public class DefaultUserService implements UserService {
 
     private final UserRepository userRepository;
 
     @Override
     public User addUser(User user) {
+
         return userRepository.save(user);
     }
 
     @Override
     public User updateUser(User user) {
+
         return userRepository.save(user);
     }
 
     @Override
     public void removeUser(Integer id) {
+
         userRepository.delete(id);
     }
 
     @Override
     public User getUserByUsername(String username) {
+
         return userRepository.findByUsername(username);
     }
 
     @Override
     public List<User> listUsers() {
+
         return userRepository.findAll();
     }
 }

@@ -1,5 +1,6 @@
 package lych.helloworld.security.config;
 
+import lombok.RequiredArgsConstructor;
 import lych.helloworld.security.filter.AuthenticationTokenFilter;
 import lych.helloworld.security.service.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final TokenAuthenticationService tokenAuthenticationService;
 
-    @Autowired
-    protected SecurityConfig(final TokenAuthenticationService tokenAuthenticationService) {
-        super();
-        this.tokenAuthenticationService = tokenAuthenticationService;
-    }
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/auth").permitAll()
                 .antMatchers("/signup").permitAll()
-                .antMatchers("/students/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new AuthenticationTokenFilter(tokenAuthenticationService),
@@ -40,16 +36,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+
         super.configure(auth);
     }
 
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
+
         return super.authenticationManagerBean();
     }
 
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception {
+
         return super.userDetailsServiceBean();
     }
 }

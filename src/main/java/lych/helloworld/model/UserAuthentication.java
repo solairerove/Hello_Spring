@@ -5,10 +5,12 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class UserAuthentication implements Authentication{
+public class UserAuthentication implements Authentication {
+
     private static final long serialVersionUID = 458487503823948850L;
 
     private final User user;
+
     private boolean authenticated = true;
 
     public UserAuthentication(User user) {
@@ -43,7 +45,7 @@ public class UserAuthentication implements Authentication{
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 
-        this.authenticated=isAuthenticated;
+        this.authenticated = isAuthenticated;
     }
 
     @Override

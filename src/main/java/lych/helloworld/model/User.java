@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
 @Data
+@Table(name = "users")
 public class User implements Persistable<Integer>, UserDetails {
 
     private static final long serialVersionUID = 5284394479945374078L;
+
     @Id
-    @Column(name = "userId")
+    @Column(name = "Id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Integer Id;
@@ -28,6 +29,7 @@ public class User implements Persistable<Integer>, UserDetails {
     private String password;
 
     @Column(name = "authority")
+    @Transient
     private List<Authority> authorities;
 
     @Column(name = "accountNonExpired")

@@ -22,14 +22,14 @@ public class StudentController {
     }
 
     @RequestMapping(value = "students", method = RequestMethod.POST)
-    public ResponseEntity addStudent(@RequestBody Student student) throws NullFieldException {
+    public ResponseEntity addStudent(@RequestBody final Student student) throws NullFieldException {
 
         if (student.getLastName() == null || student.getFirstName() == null) throw new NullFieldException();
         else return ResponseEntity.ok().body(defaultStudentService.addStudent(student));
     }
 
     @RequestMapping(value = "students/{id}", method = RequestMethod.PUT)
-    public ResponseEntity updateStudent(@PathVariable("id") Integer id, @RequestBody Student student) throws NullFieldException, NoExistException {
+    public ResponseEntity updateStudent(@PathVariable("id") final Integer id, @RequestBody final Student student) throws NullFieldException, NoExistException {
 
         if (student.getFirstName() == null || student.getLastName() == null) throw new NullFieldException();
 
@@ -44,7 +44,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "students/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteStudent(@PathVariable("id") Integer id) throws NoExistException {
+    public ResponseEntity deleteStudent(@PathVariable("id") final Integer id) throws NoExistException {
 
         if (defaultStudentService.studentExist(id)) {
             Student deletedStudent = defaultStudentService.getStudentById(id);
@@ -55,7 +55,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "students/{id}", method = RequestMethod.GET)
-    public ResponseEntity showTheStudent(@PathVariable("id") Integer id) throws NoExistException {
+    public ResponseEntity showTheStudent(@PathVariable("id") final Integer id) throws NoExistException {
         if (defaultStudentService.studentExist(id)) {
 
             return ResponseEntity.ok().body(defaultStudentService.getStudentById(id));

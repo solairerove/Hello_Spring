@@ -10,9 +10,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "students")
 @Data
-public class Student implements Persistable<Integer>{
+public class Student implements Persistable<Integer> {
 
     private static final long serialVersionUID = -1865211746167974108L;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "increment")

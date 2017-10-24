@@ -18,15 +18,20 @@ public class AuthController {
 
     private final DefaultTokenService tokenService;
 
-    @RequestMapping(value = "/auth",method = RequestMethod.POST)
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity authenticate(@RequestBody final UserDto userDto) throws Exception {
+
         final String token = tokenService.getToken(userDto.getUsername(), userDto.getPassword());
+
         if (token != null) {
+
             final TokenDto response = new TokenDto();
             response.setToken(token);
+
             return ResponseEntity.ok().body(response);
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No att");
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No Authentication!");
         }
     }
 }

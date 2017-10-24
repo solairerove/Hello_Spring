@@ -19,40 +19,50 @@ public class DefaultTokenAuthenticationService implements TokenAuthenticationSer
 
     private final UserDetailsService userDetailsService;
 
-
     @Override
     public Authentication authenticate(HttpServletRequest request) {
 
-        final String token=request.getHeader(SecurityConstants.authHeaderName);
-        final Jws<Claims> tokenData=parseToken(token);
-        if(tokenData!=null)
-        {
-         User user= getUserFromToken(tokenData);
-           if(user!=null)
-           {
-               return new UserAuthentication(user);
-           }
+        final String token = request.getHeader(SecurityConstants.authHeaderName);
+
+        final Jws<Claims> tokenData = parseToken(token);
+
+        if (tokenData != null) {
+
+            User user = getUserFromToken(tokenData);
+            if (user != null) {
+
+                return new UserAuthentication(user);
+            }
         }
+
         return null;
     }
 
     private Jws<Claims> parseToken(final String token) {
+
         if (token != null) {
+
             try {
+
                 return Jwts.parser().setSigningKey(SecurityConstants.secretKey).parseClaimsJws(token);
             } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException
                     | SignatureException | IllegalArgumentException e) {
+
                 return null;
             }
         }
+
         return null;
     }
 
     private User getUserFromToken(final Jws<Claims> tokenData) {
+
         try {
+
             return (User) userDetailsService
                     .loadUserByUsername(tokenData.getBody().get("username").toString());
         } catch (UsernameNotFoundException e) {
+
             throw new RuntimeException("User "
                     + tokenData.getBody().get("username").toString() + " not found");
         }

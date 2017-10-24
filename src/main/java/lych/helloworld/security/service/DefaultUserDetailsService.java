@@ -17,12 +17,12 @@ public class DefaultUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        final User user=userService.getUserByUsername(username);
 
-        if(user!=null)
-        {
+        final User user = userService.getUserByUsername(username);
+
+        if (user != null) {
+
             return user;
-        }
-        else throw new UsernameNotFoundException("User not found");
+        } else throw new UsernameNotFoundException("User not found");
     }
 }
