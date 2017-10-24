@@ -3,6 +3,7 @@ package lych.helloworld.model;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -17,10 +18,10 @@ public class User implements Persistable<Integer>, UserDetails {
     private static final long serialVersionUID = 5284394479945374078L;
 
     @Id
-    @Column(name = "Id")
+    @Column(name = "id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -28,8 +29,8 @@ public class User implements Persistable<Integer>, UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "authority")
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Authority> authorities;
 
     @Column(name = "accountNonExpired")
@@ -46,6 +47,6 @@ public class User implements Persistable<Integer>, UserDetails {
 
     @Override
     public boolean isNew() {
-        return Objects.nonNull(Id);
+        return Objects.nonNull(id);
     }
 }

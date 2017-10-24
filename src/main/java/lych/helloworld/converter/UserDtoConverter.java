@@ -5,8 +5,7 @@ import lych.helloworld.model.Authority;
 import lych.helloworld.model.User;
 import org.springframework.core.convert.converter.Converter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class UserDtoConverter implements Converter<UserDto, User> {
 
@@ -22,10 +21,10 @@ public class UserDtoConverter implements Converter<UserDto, User> {
         user.setCredentialsNonExpired(false);
         user.setEnabled(true);
 
-        List<Authority> authorityList = new ArrayList<>();
-        authorityList.add(Authority.User);
+        final Authority authority = new Authority();
+        authority.setRole("ROLE_USER");
 
-        user.setAuthorities(authorityList);
+        user.setAuthorities(Collections.singletonList(authority));
 
         return user;
     }
